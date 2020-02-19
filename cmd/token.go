@@ -180,7 +180,7 @@ func ReadToken(client string) (*AccessTokenResponse, error) {
         return &tokenResponse, nil
     }
 
-    if (tokenResponse.RefreshToken == "") {
+    if (tokenResponse.RefreshToken == "" || client != viper.GetString(LOGIN_CLIENT)) {
         os.Remove(tokenFile)
         return nil, errors.New("no refresh token")
     }
